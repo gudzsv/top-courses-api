@@ -1,10 +1,24 @@
 version: '3'
 services:
-  top-api-new:
+  top-api:
     image: top-api-new:latest
-    container_name: top-api-new
+    container_name: top-api
     restart: always
     ports:
       - 3000:3000
     volumes:
-      - ./.env:/nestapi/app/.env
+      - ./.env:/opt/app/.env
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo-data:/data/db
+    command: --wiredTigerCacheSizeGB 1.5
