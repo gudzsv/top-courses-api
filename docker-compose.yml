@@ -1,10 +1,10 @@
 version: '3'
-secrets:
-  top-api:
+services:
+  top-api-new:
     image: top-api-new:latest
     container_name: top-api-new
     restart: always
-    ports: 
+    ports:
       - 3000:3000
     volumes:
       - ./.env:/nestapi/app/.env
