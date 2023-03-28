@@ -3,4 +3,4 @@
 /.vscode
 /mongo-data
 .env
-.gitinore
+.gitignore
