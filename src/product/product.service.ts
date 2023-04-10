@@ -14,12 +14,12 @@ export class ProductService {
 		return this.productModel.create(dto);
 	}
 
-	async fingById(id: string) {
+	async findById(id: string) {
 		return this.productModel.findById(id).exec();
 	}
 
 	async deleteById(id: string) {
-		return this.productModel.findByIdAndRemove(id).exec();
+		return this.productModel.findByIdAndDelete(id).exec();
 	}
 
 	async updateById(id: string, dto: CreateProductDto) {
@@ -57,7 +57,7 @@ export class ProductService {
 						$function: {
 							body: `function (reviews) {
 								reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-								return reviews
+								return reviews;
 							}`,
 							args: ['$reviews'],
 							lang: 'js'

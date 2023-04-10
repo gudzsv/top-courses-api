@@ -1,2 +1,1 @@
-export const PAGE_NOT_FOUND_ERROR = 'Page not found';
-export const PAGE_NOT_FOUND_BY_CATEGORY_ERROR = 'Category not found';
+export const NOT_FOUND_TOP_PAGE_ERROR = 'Page with Id not found';

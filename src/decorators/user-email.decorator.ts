@@ -5,6 +5,4 @@ export const UserEmail = createParamDecorator(
 		const request = ctx.switchToHttp().getRequest();
 		return request.user;
 	}
-)
-
- 
+);

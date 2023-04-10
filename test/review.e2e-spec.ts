@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../src/app.module';
+import { AppModule } from './../src/app.module';
 import { CreateReviewDto } from '../src/review/dto/create-review.dto';
 import { Types, disconnect } from 'mongoose';
 import { REVIEW_NOT_FOUND } from '../src/review/review.constants';
@@ -10,14 +10,14 @@ import { AuthDto } from 'src/auth/dto/auth.dto';
 const productId = new Types.ObjectId().toHexString();
 
 const loginDto: AuthDto = {
-	login: 'gsv@mail.ua',
+	login: 'a@a.ru',
 	password: '1'
-}
+};
 
 const testDto: CreateReviewDto = {
-	name: 'Review Test NAme',
-	title: 'Review Test Title',
-	description: 'Review Test Description',
+	name: 'Тест',
+	title: 'Заголовок',
+	description: 'Описание тестовое',
 	rating: 5,
 	productId
 };
@@ -37,8 +37,8 @@ describe('AppController (e2e)', () => {
 
 		const { body } = await request(app.getHttpServer())
 			.post('/auth/login')
-			.send(loginDto)
-		token = body.access_token
+			.send(loginDto);
+		token = body.access_token;
 	});
 
 	it('/review/create (POST) - success', async (done) => {
@@ -56,15 +56,12 @@ describe('AppController (e2e)', () => {
 	it('/review/create (POST) - fail', async (done) => {
 		return request(app.getHttpServer())
 			.post('/review/create')
-			.send({ ...testDto, rating: "0" })
+			.send({ ...testDto, rating: 0 })
 			.expect(400)
 			.then(({ body }: request.Response) => {
-				console.log(body);
 				done();
 			});
 	});
-
-
 
 	it('/review/byProduct/:productId (GET) - success', async (done) => {
 		return request(app.getHttpServer())

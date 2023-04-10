@@ -1,4 +1,17 @@
-import { Body, Controller, Delete, Get, HttpCode, NotFoundException, Param, Patch, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+	Body,
+	Controller,
+	Delete,
+	Get,
+	HttpCode,
+	NotFoundException,
+	Param,
+	Patch,
+	Post,
+	UseGuards,
+	UsePipes,
+	ValidationPipe
+} from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { IdValidationPipe } from 'src/pipes/id-validation.pipe';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -20,12 +33,11 @@ export class ProductController {
 	@UseGuards(JwtAuthGuard)
 	@Get(':id')
 	async get(@Param('id', IdValidationPipe) id: string) {
-		const product = await this.productService.fingById(id)
+		const product = await this.productService.findById(id);
 		if (!product) {
 			throw new NotFoundException(PRODUCT_NOT_FOUND_ERROR);
 		}
 		return product;
-
 	}
 
 	@UseGuards(JwtAuthGuard)
@@ -51,6 +63,6 @@ export class ProductController {
 	@HttpCode(200)
 	@Post('find')
 	async find(@Body() dto: FindProductDto) {
-		return await this.productService.findWithReviews(dto);
+		return this.productService.findWithReviews(dto);
 	}
 }

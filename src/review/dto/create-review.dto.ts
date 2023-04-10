@@ -1,6 +1,5 @@
 import { IsNumber, IsString, Max, Min } from 'class-validator';
 
-
 export class CreateReviewDto {
 	@IsString()
 	name: string;
@@ -11,8 +10,8 @@ export class CreateReviewDto {
 	@IsString()
 	description: string;
 
-	@Max(5, { message: "Reating can't be more then 5" }) //You can customize this message 
-	@Min(1, { message: "Reating can't be less then 1" })
+	@Max(5)
+	@Min(1, { message: 'Рейтинг не может быть менее 1' })
 	@IsNumber()
 	rating: number;
 
